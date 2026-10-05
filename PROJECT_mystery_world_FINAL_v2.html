@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PROJECT ???</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#101525;color:#fff}
+body{overflow-x:hidden}
+button{font:inherit}
+#app{min-height:100vh;position:relative;overflow:hidden;background:
+radial-gradient(circle at 15% 15%,#5ce1e622 0 12%,transparent 28%),
+radial-gradient(circle at 85% 20%,#ff66c422 0 10%,transparent 26%),
+linear-gradient(180deg,#18234a,#101525 72%,#0b1020)}
+.cloud{position:absolute;border-radius:999px;background:#fff9;filter:blur(.2px);opacity:.75;animation:float 12s ease-in-out infinite}
+.c1{width:150px;height:42px;top:8%;left:5%}.c2{width:190px;height:48px;top:18%;right:3%;animation-delay:-4s}.c3{width:120px;height:35px;top:62%;left:-25px;animation-delay:-7s}
+@keyframes float{50%{transform:translateY(12px)}}
+.screen{display:none;min-height:100vh;position:relative;padding:24px}
+.screen.active{display:flex}
+.center{align-items:center;justify-content:center;text-align:center}
+.panel{width:min(100%,1000px);margin:auto;position:relative;z-index:2}
+.logo{font-size:clamp(42px,10vw,100px);font-weight:900;letter-spacing:.08em;text-shadow:5px 7px 0 #111;line-height:.9}
+.subtitle{font-size:clamp(14px,2.5vw,22px);letter-spacing:.18em;margin:20px 0;color:#dce7ff}
+.cta{border:0;border-radius:18px;padding:15px 28px;background:#ffd43b;color:#191526;font-weight:900;cursor:pointer;box-shadow:0 7px 0 #b68c12;transition:.15s}
+.cta:active{transform:translateY(5px);box-shadow:0 2px 0 #b68c12}
+.map{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:28px}
+.world{border:3px solid #ffffff55;border-radius:28px;padding:28px 20px;min-height:180px;text-align:left;color:white;cursor:pointer;box-shadow:0 12px 0 #0004;transition:.2s;position:relative;overflow:hidden}
+.world:hover{transform:translateY(-6px)}
+.world small{display:block;opacity:.8;letter-spacing:.15em;margin-bottom:12px}
+.world h2{margin:0;font-size:30px}
+.world p{margin:10px 0 0;opacity:.9}
+.lab{background:linear-gradient(135deg,#087f8c,#4ee1b8)}
+.mirror{background:linear-gradient(135deg,#6c3fc7,#ed6bd4)}
+.dream{background:linear-gradient(135deg,#3155c7,#7c72f2)}
+.chaos{background:linear-gradient(135deg,#ff7a18,#ff315d)}
+.game{min-height:100vh;align-items:center;justify-content:center}
+.gamebox{width:min(960px,100%);text-align:center;position:relative;z-index:2}
+.back{position:absolute;top:20px;left:20px;border:0;background:#ffffff22;color:#fff;border-radius:12px;padding:10px 14px;cursor:pointer}
+.title{font-size:clamp(34px,7vw,70px);font-weight:900;margin:20px 0 8px}
+.prompt{font-size:clamp(18px,3vw,28px);font-weight:800;margin:0 0 22px}
+.labbg{background:linear-gradient(180deg,#062f38,#07151e)}
+.mirrorbg{background:linear-gradient(180deg,#281342,#120c20)}
+.dreambg{background:linear-gradient(180deg,#101e57,#17122e)}
+.chaosbg{background:linear-gradient(180deg,#4b170b,#190d18)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:min(500px,100%);margin:20px auto}
+.cell{aspect-ratio:1;border:0;border-radius:14px;background:#b8fff0;cursor:pointer;transition:.12s;box-shadow:inset 0 -5px #3aa88f}
+.cell:hover{transform:scale(.95)}
+.cell.wrong{background:#b8fff0;box-shadow:inset 0 -5px #3aa88f}
+.choiceRow{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.choice{border:2px solid #ffffff66;background:#ffffff16;color:white;border-radius:16px;padding:15px 22px;min-width:120px;cursor:pointer;font-weight:800}
+.choice:hover{background:#ffffff28}
+.message{min-height:34px;font-weight:800;margin:18px}
+.objectGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:min(620px,100%);margin:auto}
+.object{min-height:130px;border:2px solid #ffffff44;border-radius:22px;background:#ffffff12;color:#fff;cursor:pointer;font-size:24px;position:relative}
+.object:hover{background:#ffffff22}
+.chaosTarget{width:90px;height:90px;border-radius:50%;background:#ffd43b;border:0;cursor:pointer;position:relative;box-shadow:0 8px 0 #b68c12;margin:25px auto}
+.hiddenNote{position:fixed;bottom:10px;right:12px;font-size:10px;opacity:.08}
+@media(max-width:600px){
+.screen{padding:16px}
+.map{grid-template-columns:1fr;gap:14px}
+.world{min-height:145px;padding:22px}
+.world h2{font-size:25px}
+.objectGrid{grid-template-columns:repeat(2,1fr)}
+.object{min-height:110px}
+.grid{gap:7px}
+.back{top:12px;left:12px}
+}
+</style>
+</head>
+<body>
+<div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+<section id="entry" class="screen active center">
+  <div class="panel">
+    <div class="logo">PROJECT<br>???</div>
+    <div class="subtitle">A LITTLE WORLD WITH SOMETHING WRONG WITH IT.</div>
+    <button class="cta" onclick="show('map')">ENTER THE WORLD</button>
+  </div>
+</section>
+
+<section id="map" class="screen center">
+  <div class="panel">
+    <div class="subtitle">CHOOSE A WORLD</div>
+    <div class="map">
+      <button class="world lab" onclick="startLab()"><small>WORLD 01</small><h2>🧪 THE LAB</h2><p>Find what doesn't belong.</p></button>
+      <button class="world mirror" onclick="startMirror()"><small>WORLD 02</small><h2>🪞 THE MIRROR</h2><p>The game learns how you choose.</p></button>
+      <button class="world dream" onclick="startDream()"><small>WORLD 03</small><h2>🌙 THE DREAM</h2><p>Things change when you stop looking.</p></button>
+      <button class="world chaos" onclick="startChaos()"><small>WORLD 04</small><h2>🔥 THE CHAOS</h2><p>Don't trust the rules.</p></button>
+    </div>
+  </div>
+</section>
+
+<section id="game" class="screen game">
+ <button class="back" onclick="show('map')">← WORLDS</button>
+ <div id="gamebox" class="gamebox"></div>
+</section>
+
+<script>
+const $=id=>document.getElementById(id);
+function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');}
+function game(title,prompt,body,cls){
+ const s=$('game');s.className='screen game '+cls;
+ $('gamebox').innerHTML='<div class="title">'+title+'</div><div class="prompt">'+prompt+'</div>'+body;
+}
+let labRound=0;
+function startLab(){labRound=0;labNext();}
+function labNext(){
+ labRound++;
+ if(labRound>5){game('🧪 TEST COMPLETE','YOU FOUND WHAT WE ASKED YOU TO FIND.','<div class="message">THAT\'S NOT THE SAME AS FINDING EVERYTHING.</div><button class="cta" onclick="show(\'map\')">RETURN</button>','labbg');return}
+ let n=labRound===1?9:labRound===2?16:25;
+ let wrong=Math.floor(Math.random()*n);
+ let cells='';
+ for(let i=0;i<n;i++) cells+='<button class="cell" onclick="labPick('+i+','+wrong+')"></button>';
+ game('🧪 THE LAB','FIND THE WRONG ONE.','<div class="message">ROUND '+labRound+' / 5</div><div class="grid" style="grid-template-columns:repeat('+Math.ceil(Math.sqrt(n))+',1fr)">'+cells+'</div><div id="labmsg" class="message"></div>','labbg');
+}
+function labPick(i,w){
+ if(i===w){$('labmsg').textContent=labRound===5?'WHY DID YOU CHOOSE THAT ONE?':'CORRECT.';setTimeout(labNext,850)}
+ else {$('labmsg').textContent='NO. LOOK AGAIN.'}
+}
+let mirrorChoices=[],mirrorStep=0;
+function startMirror(){mirrorChoices=[];mirrorStep=0;mirrorNext();}
+function mirrorNext(){
+ mirrorStep++;
+ if(mirrorStep>5){game('🪞 THE MIRROR','YOU THINK YOU FIGURED ME OUT.','<div class="message">I FIGURED YOU OUT FIRST.</div><button class="cta" onclick="show(\'map\')">RETURN</button>','mirrorbg');return}
+ let left='LEFT',right='RIGHT';
+ if(mirrorStep===3 && mirrorChoices.filter(x=>x==='RIGHT').length>=2){left='RIGHT';right='RIGHT'}
+ game('🪞 THE MIRROR','CHOOSE ONE.','<div class="choiceRow"><button class="choice" onclick="mirrorPick(\'LEFT\')">'+left+'</button><button class="choice" onclick="mirrorPick(\'RIGHT\')">'+right+'</button></div><div id="mirmsg" class="message"></div>','mirrorbg');
+}
+function mirrorPick(x){mirrorChoices.push(x);$('mirmsg').textContent=mirrorStep===2?'TOO FAST.':mirrorStep===4?'DID YOU?':'INTERESTING.';setTimeout(mirrorNext,700)}
+function startDream(){
+ game('🌙 THE DREAM','EXPLORE.','<div class="message">Something here remembers you.</div><div class="objectGrid"><button class="object" onclick="dream(\'clock\')">🕰️<br>CLOCK</button><button class="object" onclick="dream(\'window\')">🪟<br>WINDOW</button><button class="object" onclick="dream(\'lamp\')">💡<br>LAMP</button><button class="object" onclick="dream(\'chair\')">🪑<br>CHAIR</button><button class="object" onclick="dream(\'door\')">🚪<br>DOOR</button><button class="object" onclick="dream(\'star\')">⭐<br>STAR</button></div><div id="dreammsg" class="message"></div>','dreambg');
+}
+let dreamSeq=[];
+function dream(x){dreamSeq.push(x);let m={clock:'The time is wrong.',window:'The window was open before.',lamp:'The lamp remembers the window.',chair:'Nothing happens.',door:'You have been here before.',star:'That star was not there.'};$('dreammsg').textContent=m[x];if(dreamSeq.join('-').includes('lamp-window-clock-door')){setTimeout(()=>game('🌙 THE DREAM','YOU UNDERSTOOD THE DREAM.','<div class="message">THAT WASN\'T THE DREAM.</div><button class="cta" onclick="show(\'map\')">LEAVE</button>','dreambg'),700)}}
+let chaosStep=0,chaosRule=0;
+function startChaos(){chaosStep=0;chaosNext();}
+function chaosNext(){
+ chaosStep++;
+ if(chaosStep>6){game('🔥 CHAOS','THERE ARE NO RULES NOW.','<div class="message">INTERESTING.</div><button class="cta" onclick="show(\'map\')">RETURN</button>','chaosbg');return}
+ chaosRule=(chaosRule+1)%3;
+ let p=chaosRule===0?'CLICK THE CIRCLE.':chaosRule===1?'DON\'T CLICK THE CIRCLE.':'CLICK IT ONLY WHEN IT STOPS.';
+ let target=chaosRule===1?'onclick="chaosFail()"':'onclick="chaosGood()"';
+ game('🔥 THE CHAOS','RULE #'+chaosStep+'<br>'+p,'<button class="chaosTarget" '+target+'></button><div id="chaosmsg" class="message"></div>','chaosbg');
+ if(chaosRule===1)setTimeout(()=>{if($('chaosmsg'))$('chaosmsg').textContent='GOOD. YOU DID NOTHING.';setTimeout(chaosNext,650)},1200);
+}
+function chaosGood(){$('chaosmsg').textContent='GOOD.';setTimeout(chaosNext,600)}
+function chaosFail(){$('chaosmsg').textContent='WHO TOLD YOU TO DO THAT?';setTimeout(chaosNext,700)}
+</script>
+<div class="hiddenNote">you weren't looking for this.</div>
+</body>
+</html>
